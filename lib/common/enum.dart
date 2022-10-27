@@ -4,18 +4,22 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 import '../presentation/pages/home/home_page.dart';
+import '../presentation/pages/library/library_page.dart';
 
-enum NavigationPageData {
-  home(HomePage(), "Home", true, null);
+enum NavigationMenuData {
+  home(HomePage(), "Home", Icons.home, true, null),
+  library(LibraryPage(), "Library", Icons.library_music_outlined, true, null);
 
   final Widget page;
   final String title;
+  final IconData icon;
   final bool isShowMenu;
-  final NavigationPageData? parent;
+  final NavigationMenuData? parent;
 
-  const NavigationPageData(
+  const NavigationMenuData(
     this.page,
     this.title,
+    this.icon,
     this.isShowMenu,
     this.parent,
   );

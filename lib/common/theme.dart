@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const Color primaryColor = Color(0xFF192741);
+const Color primaryColor = Color(0xFFFD9E80);
 const Color secondaryColor = Color(0xFFDDE4EB);
 
-const Color bgColor = Color(0xFFFBFCFF);
-const Color bgCardColor = Color(0xFFD8D8D8);
-const Color bgCardColor2 = Color(0xFFE3E8F3);
-const Color bgCardColor3 = Color(0xFFDDE4EB);
-const Color bgCardColor4 = Color(0xFFEDF2F7);
-const Color bgCardColor5 = Color(0xFFEEF4FF);
-const Color bgCardColor6 = Color(0xFFCCDEFF);
-const Color bgSelected = Color(0xFF0E192E);
+const Color bgColor = Color(0xFFFAFAFA);
+const Color bgSelected = Color(0xFFC29AFF);
 const Color activeMenuColor = Color(0xFF484F5D);
 const Color borderColor = Color(0xFFDDE4EB);
 const Color borderBlueColor = Color(0xFF8DA1CE);
 const Color colorWhite = Color(0xFFFFFFFF);
-const Color colorBlack = Color(0xFF120C18);
+const Color colorBlack = Color(0xFF16162F);
 const Color colorGrey = Color(0xFFF6F6F6);
-const Color colorGrey2 = Color(0xFF7F7F7F);
+const Color colorGrey2 = Color(0xFFBFC2C7);
+const Color colorGrey3 = Color(0xFF8A919C);
 const Color colorGreyBlue = Color(0xFFA3AEC1);
 const Color colorGreyDark = Color(0xFFABA6AC);
 const Color colorBlue = Color(0xFF70A0FF);
-const Color colorBlueLink = Color(0xFF0044C7);
+const Color colorBlueDeep = Color(0xFF4D0EFF);
 const Color colorYellow = Color(0xFFFEC842);
 const Color colorRed = Color(0xFFFF6868);
 const Color colorGreen = Color(0xFF06D186);

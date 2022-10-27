@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'presentation/pages/home/home_page.dart';
+import 'package:get/get.dart';
+import 'package:splay/common/theme.dart';
+import 'package:splay/presentation/pages/main/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
+      theme: lightTheme,
+      initialRoute: MainPage.routeName,
+      debugShowCheckedModeBanner: false,
+      getPages: [
+        GetPage(
+          name: MainPage.routeName,
+          page: () => const MainPage(),
+        ),
+      ],
     );
   }
 }

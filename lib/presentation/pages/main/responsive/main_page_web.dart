@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:splay/common/theme.dart';
 import 'package:splay/presentation/controllers/main_controller.dart';
+import 'package:splay/presentation/widgets/audio_player_widget.dart';
 
 class MainPageWeb extends StatelessWidget {
   final MainController controller = Get.put(MainController());
@@ -114,9 +115,13 @@ class MainPageWeb extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 110,
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        constraints: const BoxConstraints(maxHeight: 110),
         decoration: BoxDecoration(
           color: theme.primaryColor,
+        ),
+        child: const Center(
+          child: AudioPlayerWidget(),
         ),
       ),
     );

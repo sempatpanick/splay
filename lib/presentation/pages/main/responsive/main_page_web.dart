@@ -25,6 +25,7 @@ class MainPageWeb extends StatelessWidget {
         ),
         child: Obx(
           () => Row(
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LayoutBuilder(
@@ -109,9 +110,19 @@ class MainPageWeb extends StatelessWidget {
               VerticalDivider(
                 color: theme.dividerColor,
               ),
-              controller.navigationMenus[controller.selectedNavigationMenu.value].page,
+              Expanded(
+                child: controller.navigationMenus[controller.selectedNavigationMenu.value].page,
+              ),
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: colorWhite,
+        onPressed: controller.getFilesFromDirectory,
+        child: Icon(
+          Icons.refresh,
+          color: theme.primaryColor,
         ),
       ),
       bottomNavigationBar: Container(

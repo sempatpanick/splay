@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 import 'package:splay/common/utils.dart';
 import 'package:splay/presentation/controllers/main_controller.dart';
-
-import '../../common/theme.dart';
 
 class AudioPlayerWidget extends StatefulWidget {
   const AudioPlayerWidget({Key? key}) : super(key: key);
@@ -37,27 +36,31 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: const SizedBox(
-                width: 50,
-                height: 50,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: colorRed,
-                  ),
-                ),
+              child: SizedBox.fromSize(
+                size: const Size(50, 50),
+                child: controller.playingMusicMetadata.value?.albumArt != null
+                    ? Image.memory(controller.playingMusicMetadata.value!.albumArt!)
+                    : Image.network(
+                        'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
+                      ),
               ),
             ),
             const SizedBox(
               width: 24,
             ),
             Expanded(
-              flex: 0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Song Title",
+                    (controller.playingMusicMetadata.value?.trackName ?? '').isNotEmpty
+                        ? controller.playingMusicMetadata.value?.trackName ?? ''
+                        : controller.playingMusic.value != null
+                            ? p.basenameWithoutExtension(controller.playingMusic.value!.path)
+                            : '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.subtitle1?.copyWith(
                       color: theme.secondaryHeaderColor,
                       fontWeight: FontWeight.bold,
@@ -67,7 +70,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
                     height: 8.0,
                   ),
                   Text(
-                    "Artist, Release Year",
+                    "${controller.playingMusicMetadata.value?.albumArtistName ?? ''}${controller.playingMusicMetadata.value?.year != null ? ", ${controller.playingMusicMetadata.value?.year}" : ''}",
                     style: theme.textTheme.subtitle2?.copyWith(
                       color: theme.secondaryHeaderColor,
                     ),
@@ -79,6 +82,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
               width: 24,
             ),
             Expanded(
+              flex: 2,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -214,7 +218,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
                   inactiveColor: theme.secondaryHeaderColor,
                   value: controller.volume.value,
                   min: 0,
-                  max: 100,
+                  max: 1,
                   onChanged: controller.changeVolume,
                 ),
               ),

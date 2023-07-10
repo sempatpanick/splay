@@ -5,7 +5,7 @@ import 'package:splay/presentation/pages/main/responsive/main_page_web.dart';
 class MainPage extends StatelessWidget {
   static const String routeName = '/main';
 
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {

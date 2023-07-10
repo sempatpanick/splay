@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:splay/common/theme.dart';
 import 'package:splay/presentation/pages/main/main_page.dart';
 
+import 'injection.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
   runApp(const MyApp());
 }
 

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:splay/common/theme.dart';
 import 'package:splay/presentation/controllers/main_controller.dart';
-import 'package:splay/presentation/widgets/audio_player_widget.dart';
+
+import '../../../widgets/audio_player_widget.dart';
 
 class MainPageWeb extends StatelessWidget {
   final MainController controller = Get.put(MainController());
 
-  MainPageWeb({Key? key}) : super(key: key);
+  MainPageWeb({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class MainPageWeb extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           menu.title,
-                                          style: theme.textTheme.subtitle1?.copyWith(
+                                          style: theme.textTheme.titleMedium?.copyWith(
                                             color: isParent || isSelectedMenu
                                                 ? colorWhite
                                                 : colorGrey3,
@@ -115,14 +116,6 @@ class MainPageWeb extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: colorWhite,
-        onPressed: controller.getFilesFromDirectory,
-        child: Icon(
-          Icons.refresh,
-          color: theme.primaryColor,
         ),
       ),
       bottomNavigationBar: Container(

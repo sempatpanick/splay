@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LibraryPagePhone extends StatelessWidget {
-  const LibraryPagePhone({Key? key}) : super(key: key);
+  const LibraryPagePhone({super.key});
 
   @override
   Widget build(BuildContext context) {

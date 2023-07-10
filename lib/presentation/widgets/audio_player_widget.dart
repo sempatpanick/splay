@@ -38,8 +38,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
               borderRadius: BorderRadius.circular(50),
               child: SizedBox.fromSize(
                 size: const Size(50, 50),
-                child: controller.playingMusicMetadata.value?.albumArt != null
-                    ? Image.memory(controller.playingMusicMetadata.value!.albumArt!)
+                child: controller.selectedPlayingMusicMetadata.value?.albumArt != null
+                    ? Image.memory(controller.selectedPlayingMusicMetadata.value!.albumArt!)
                     : Image.network(
                         'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
                       ),
@@ -54,10 +54,11 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    (controller.playingMusicMetadata.value?.trackName ?? '').isNotEmpty
-                        ? controller.playingMusicMetadata.value?.trackName ?? ''
-                        : controller.playingMusic.value != null
-                            ? p.basenameWithoutExtension(controller.playingMusic.value!.path)
+                    (controller.selectedPlayingMusicMetadata.value?.trackName ?? '').isNotEmpty
+                        ? controller.selectedPlayingMusicMetadata.value?.trackName ?? ''
+                        : controller.selectedPlayingMusic.value != null
+                            ? p.basenameWithoutExtension(
+                                controller.selectedPlayingMusic.value!.path)
                             : '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -70,7 +71,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> with TickerProvid
                     height: 8.0,
                   ),
                   Text(
-                    "${controller.playingMusicMetadata.value?.albumArtistName ?? ''}${controller.playingMusicMetadata.value?.year != null ? ", ${controller.playingMusicMetadata.value?.year}" : ''}",
+                    "${controller.selectedPlayingMusicMetadata.value?.albumArtistName ?? ''}${controller.selectedPlayingMusicMetadata.value?.year != null ? ", ${controller.selectedPlayingMusicMetadata.value?.year}" : ''}",
                     style: theme.textTheme.subtitle2?.copyWith(
                       color: theme.secondaryHeaderColor,
                     ),

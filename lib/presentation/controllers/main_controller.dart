@@ -6,17 +6,12 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
-import 'package:splay/common/state_enum.dart';
 
 import '../../common/enum.dart';
 
 class MainController extends GetxController {
   final AudioPlayer audioPlayer = AudioPlayer();
   late AnimationController animationController;
-
-  Rx<RequestState> stateLibrary = RequestState.empty.obs;
 
   RxList<NavigationMenuData> navigationMenus = NavigationMenuData.values.obs;
   RxInt selectedNavigationMenu = 0.obs;
@@ -31,11 +26,8 @@ class MainController extends GetxController {
   Rx<Duration> durationAudio = Duration.zero.obs;
   Rx<Duration> positionAudio = Duration.zero.obs;
 
-  Rxn<FileSystemEntity> playingMusic = Rxn<FileSystemEntity>();
-  Rxn<Metadata> playingMusicMetadata = Rxn<Metadata>();
-
-  RxList<FileSystemEntity> myLibrary = <FileSystemEntity>[].obs;
-  RxList<Metadata> metadataMyLibrary = <Metadata>[].obs;
+  Rxn<FileSystemEntity> selectedPlayingMusic = Rxn<FileSystemEntity>();
+  Rxn<Metadata> selectedPlayingMusicMetadata = Rxn<Metadata>();
 
   @override
   void onInit() {
@@ -54,7 +46,6 @@ class MainController extends GetxController {
     audioPlayer.onPositionChanged.listen((currentPosition) {
       setPositionAudio(currentPosition);
     });
-    debugPrint('on init');
 
     super.onInit();
   }
@@ -64,18 +55,7 @@ class MainController extends GetxController {
     audioPlayer.dispose();
     animationController.dispose();
 
-    debugPrint('on dispose');
-
     super.dispose();
-  }
-
-  @override
-  void onClose() {
-    audioPlayer.dispose();
-    animationController.dispose();
-
-    debugPrint('on close');
-    super.onClose();
   }
 
   void changeSelectedNavigationMenu(NavigationMenuData menu) {
@@ -88,8 +68,8 @@ class MainController extends GetxController {
     await audioPlayer.play(
       DeviceFileSource(file.path),
     );
-    playingMusic.value = file;
-    playingMusicMetadata.value = metadata;
+    selectedPlayingMusic.value = file;
+    selectedPlayingMusicMetadata.value = metadata;
     update();
   }
 
@@ -187,44 +167,5 @@ class MainController extends GetxController {
 
     await audioPlayer.setVolume(tmpVolume.value);
     volume.value = tmpVolume.value;
-  }
-
-  Future<void> getFilesFromDirectory() async {
-    changeStateLibrary(RequestState.loading);
-    try {
-      final get = await getDownloadsDirectory();
-      if (get == null) return;
-      final dir = Directory('E:/Dadang/Lagu/Laguku');
-      var tempFiles = <FileSystemEntity>[];
-      var completer = Completer<List<FileSystemEntity>>();
-      var lister = dir.list(recursive: false);
-      lister.listen(
-        (file) => tempFiles.add(file),
-        // should also register onError
-        onDone: () => completer.complete(tempFiles),
-      );
-      final files = await completer.future;
-      final searchMusic = files.where((item) => p.extension(item.path) == '.mp3').toList();
-      myLibrary.assignAll(searchMusic);
-      await getMetaData();
-      changeStateLibrary(RequestState.loaded);
-    } catch (e) {
-      changeStateLibrary(RequestState.error);
-    }
-  }
-
-  Future<void> getMetaData() async {
-    List<Metadata> metaDataList = [];
-    for (var item in myLibrary) {
-      final metadata = await MetadataRetriever.fromFile(File(item.path));
-      metaDataList.add(metadata);
-    }
-
-    metadataMyLibrary.assignAll(metaDataList);
-  }
-
-  void changeStateLibrary(RequestState state) {
-    stateLibrary.value = state;
-    update();
   }
 }

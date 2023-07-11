@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
 import 'package:splay/common/state_enum.dart';
 import 'package:splay/presentation/controllers/library_controller.dart';
 
@@ -45,16 +45,14 @@ class LibraryPageWeb extends StatelessWidget {
                 const SizedBox(
                   height: 16.0,
                 ),
-                if (controller.stateLibrary.value == RequestState.loading ||
-                    controller.stateMetaDataLibrary.value == RequestState.loading)
+                if (controller.stateLibrary.value == RequestState.loading)
                   Center(
                     child: CircularProgressIndicator(
                       color: theme.primaryColor,
                       backgroundColor: colorGrey2,
                     ),
                   ),
-                if (controller.stateLibrary.value == RequestState.loaded &&
-                    controller.stateMetaDataLibrary.value == RequestState.loaded)
+                if (controller.stateLibrary.value == RequestState.loaded)
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -67,10 +65,10 @@ class LibraryPageWeb extends StatelessWidget {
                     itemCount: controller.myLibrary.length,
                     itemBuilder: (context, index) {
                       final library = controller.myLibrary[index];
-                      final metaData = controller.metadataMyLibrary[index];
 
                       return InkWell(
-                        onTap: () => controller.mainController.playMusic(library, metaData),
+                        onTap: () =>
+                            controller.mainController.playMusic(library.file, library.metaData),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -94,8 +92,8 @@ class LibraryPageWeb extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6.0),
                                   child: SizedBox.fromSize(
                                     size: const Size(150, 150),
-                                    child: metaData.albumArt != null
-                                        ? Image.memory(metaData.albumArt!)
+                                    child: library.metaData.albumArt != null
+                                        ? Image.memory(library.metaData.albumArt!)
                                         : Image.network(
                                             'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
                                           ),
@@ -107,9 +105,7 @@ class LibraryPageWeb extends StatelessWidget {
                               height: 10.0,
                             ),
                             Text(
-                              (metaData.trackName ?? '').isNotEmpty
-                                  ? metaData.trackName ?? ''
-                                  : p.basenameWithoutExtension(library.path),
+                              library.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.titleMedium?.copyWith(
@@ -121,7 +117,7 @@ class LibraryPageWeb extends StatelessWidget {
                               height: 4.0,
                             ),
                             Text(
-                              metaData.albumArtistName ?? '',
+                              library.metaData.albumArtistName ?? '',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.titleMedium?.copyWith(
@@ -137,13 +133,31 @@ class LibraryPageWeb extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: colorWhite,
-          onPressed: controller.getFilesFromDirectory,
-          child: Icon(
-            Icons.refresh,
-            color: theme.primaryColor,
-          ),
+        floatingActionButton: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              backgroundColor: colorWhite,
+              onPressed: controller.initialize,
+              tooltip: "Refresh",
+              child: Icon(
+                Icons.refresh,
+                color: theme.primaryColor,
+              ),
+            ),
+            const SizedBox(
+              width: 24.0,
+            ),
+            FloatingActionButton(
+              backgroundColor: colorWhite,
+              onPressed: controller.addNewDirectory,
+              tooltip: "Add Folder",
+              child: Icon(
+                CupertinoIcons.folder_badge_plus,
+                color: theme.primaryColor,
+              ),
+            ),
+          ],
         ),
       ),
     );

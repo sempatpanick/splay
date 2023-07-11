@@ -5,10 +5,30 @@ import 'package:intl/intl.dart';
 
 import '../presentation/pages/home/home_page.dart';
 import '../presentation/pages/library/library_page.dart';
+import '../presentation/pages/settings/settings_page.dart';
 
 enum NavigationMenuData {
-  home(HomePage(), "Home", Icons.home, true, null),
-  library(LibraryPage(), "Library", Icons.library_music_outlined, true, null);
+  home(
+    page: HomePage(),
+    title: "Home",
+    icon: Icons.home,
+    isShowMenu: true,
+    parent: null,
+  ),
+  library(
+    page: LibraryPage(),
+    title: "Library",
+    icon: Icons.library_music_outlined,
+    isShowMenu: true,
+    parent: null,
+  ),
+  settings(
+    page: SettingsPage(),
+    title: "Settings",
+    icon: Icons.settings_outlined,
+    isShowMenu: true,
+    parent: null,
+  );
 
   final Widget page;
   final String title;
@@ -16,13 +36,13 @@ enum NavigationMenuData {
   final bool isShowMenu;
   final NavigationMenuData? parent;
 
-  const NavigationMenuData(
-    this.page,
-    this.title,
-    this.icon,
-    this.isShowMenu,
+  const NavigationMenuData({
+    required this.page,
+    required this.title,
+    required this.icon,
+    required this.isShowMenu,
     this.parent,
-  );
+  });
 }
 
 enum PeriodicData {

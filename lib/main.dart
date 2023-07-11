@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:splay/common/theme.dart';
@@ -7,6 +8,7 @@ import 'injection.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   init();
   runApp(const MyApp());
 }

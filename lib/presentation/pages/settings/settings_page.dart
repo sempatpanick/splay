@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/settings_controller.dart';
-import 'responsive/settings_page_phone.dart';
 import 'responsive/settings_page_web.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -19,7 +18,7 @@ class SettingsPage extends StatelessWidget {
       ),
       builder: (_) {
         if (size.width <= 700) {
-          return const SettingsPagePhone();
+          return const SettingsPageWeb();
         }
         return const SettingsPageWeb();
       },

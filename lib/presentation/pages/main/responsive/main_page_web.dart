@@ -6,26 +6,24 @@ import 'package:splay/presentation/controllers/main_controller.dart';
 import '../../../widgets/audio_player_widget.dart';
 
 class MainPageWeb extends StatelessWidget {
-  final MainController controller = Get.put(MainController());
-
-  MainPageWeb({super.key});
+  const MainPageWeb({super.key});
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return Scaffold(
-      backgroundColor: theme.primaryColor,
-      body: Container(
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(40.0),
+    return GetX<MainController>(
+      builder: (controller) => Scaffold(
+        backgroundColor: theme.primaryColor,
+        body: Container(
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(40.0),
+            ),
           ),
-        ),
-        child: Obx(
-          () => Row(
+          child: Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -112,20 +110,23 @@ class MainPageWeb extends StatelessWidget {
                 color: theme.dividerColor,
               ),
               Expanded(
-                child: controller.navigationMenus[controller.selectedNavigationMenu.value].page,
+                child: controller.navigationMenus
+                    .where((item) => item.isShowMenu)
+                    .toList()[controller.selectedNavigationMenu.value]
+                    .page,
               ),
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        constraints: const BoxConstraints(maxHeight: 110),
-        decoration: BoxDecoration(
-          color: theme.primaryColor,
-        ),
-        child: const Center(
-          child: AudioPlayerWidget(),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          constraints: const BoxConstraints(maxHeight: 110),
+          decoration: BoxDecoration(
+            color: theme.primaryColor,
+          ),
+          child: const Center(
+            child: AudioPlayerWidget(),
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:get_it/get_it.dart';
 
 import 'common/utils.dart';
@@ -52,4 +53,5 @@ void init() {
   locator.registerLazySingleton(() => Utils());
 
   // external
+  locator.registerLazySingleton(() => AudioPlayer());
 }

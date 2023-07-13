@@ -8,6 +8,7 @@
 
 #include <audioplayers_linux/audioplayers_linux_plugin.h>
 #include <flutter_media_metadata/flutter_media_metadata_plugin.h>
+#include <window_size/window_size_plugin.h>
 
 void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) audioplayers_linux_registrar =
@@ -16,4 +17,7 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) flutter_media_metadata_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterMediaMetadataPlugin");
   flutter_media_metadata_plugin_register_with_registrar(flutter_media_metadata_registrar);
+  g_autoptr(FlPluginRegistrar) window_size_registrar =
+      fl_plugin_registry_get_registrar_for_plugin(registry, "WindowSizePlugin");
+  window_size_plugin_register_with_registrar(window_size_registrar);
 }

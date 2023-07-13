@@ -64,11 +64,10 @@ class LibraryPageWeb extends StatelessWidget {
                     ),
                     itemCount: controller.myLibrary.length,
                     itemBuilder: (context, index) {
-                      final library = controller.myLibrary[index];
+                      final item = controller.myLibrary[index];
 
                       return InkWell(
-                        onTap: () =>
-                            controller.mainController.playMusic(library.file, library.metaData),
+                        onTap: () => controller.mainController.playMusic(item.file, item.metaData),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -92,8 +91,8 @@ class LibraryPageWeb extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6.0),
                                   child: SizedBox.fromSize(
                                     size: const Size(150, 150),
-                                    child: library.metaData.albumArt != null
-                                        ? Image.memory(library.metaData.albumArt!)
+                                    child: item.metaData.albumArt != null
+                                        ? Image.memory(item.metaData.albumArt!)
                                         : Image.network(
                                             'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
                                           ),
@@ -105,7 +104,7 @@ class LibraryPageWeb extends StatelessWidget {
                               height: 10.0,
                             ),
                             Text(
-                              library.title,
+                              item.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.titleMedium?.copyWith(
@@ -117,7 +116,7 @@ class LibraryPageWeb extends StatelessWidget {
                               height: 4.0,
                             ),
                             Text(
-                              library.metaData.albumArtistName ?? '',
+                              item.metaData.albumArtistName ?? '',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.titleMedium?.copyWith(

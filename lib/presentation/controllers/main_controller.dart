@@ -8,9 +8,12 @@ import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 import 'package:get/get.dart';
 
 import '../../common/enum.dart';
+import '../../common/utils.dart';
+import '../../injection.dart';
 
-class MainController extends GetxController {
-  final AudioPlayer audioPlayer = AudioPlayer();
+class MainController extends GetxController with GetTickerProviderStateMixin {
+  final Utils utils = locator();
+  final AudioPlayer audioPlayer = locator();
   late AnimationController animationController;
 
   RxList<NavigationMenuData> navigationMenus = NavigationMenuData.values.obs;
@@ -46,6 +49,11 @@ class MainController extends GetxController {
     audioPlayer.onPositionChanged.listen((currentPosition) {
       setPositionAudio(currentPosition);
     });
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
 
     super.onInit();
   }

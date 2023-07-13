@@ -1,14 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:splay/common/theme.dart';
 import 'package:splay/presentation/pages/main/main_page.dart';
+import 'package:window_size/window_size.dart';
 
 import 'injection.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('SPlay - Music Player');
+    setWindowMinSize(const Size(400, 500));
+  }
   init();
   runApp(const MyApp());
 }

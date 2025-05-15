@@ -7,7 +7,6 @@ class GetMetaDataListCase {
 
   GetMetaDataListCase({required this.repository});
 
-  Future<List<Metadata>> execute({required List<String> paths}) => repository.getMetaDataList(
-        paths: paths,
-      );
+  Future<List<Metadata>> execute({required List<String> paths}) =>
+      repository.getMetaDataList(paths: paths);
 }

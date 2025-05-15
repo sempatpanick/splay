@@ -59,10 +59,7 @@ enum PeriodicData {
   final String? value;
   final String? title;
 
-  const PeriodicData(
-    this.value,
-    this.title,
-  );
+  const PeriodicData(this.value, this.title);
 }
 
 extension PeriodicDataExtension on PeriodicData {
@@ -75,11 +72,19 @@ extension PeriodicDataExtension on PeriodicData {
       case PeriodicData.daily:
         return DateFormat.yMMMMd(lang).format(dateTime);
       case PeriodicData.weekly:
-        DateTime firstDayOfTheWeek = DateTime(dateTime.year, dateTime.month, dateTime.day)
-            .subtract(Duration(days: dateTime.weekday - 1));
-        DateTime lastDayOfTheWeek =
-            DateTime(firstDayOfTheWeek.year, firstDayOfTheWeek.month, firstDayOfTheWeek.day + 6);
-        String firstDayFormat = DateFormat.yMMMMd(lang).format(firstDayOfTheWeek);
+        DateTime firstDayOfTheWeek = DateTime(
+          dateTime.year,
+          dateTime.month,
+          dateTime.day,
+        ).subtract(Duration(days: dateTime.weekday - 1));
+        DateTime lastDayOfTheWeek = DateTime(
+          firstDayOfTheWeek.year,
+          firstDayOfTheWeek.month,
+          firstDayOfTheWeek.day + 6,
+        );
+        String firstDayFormat = DateFormat.yMMMMd(
+          lang,
+        ).format(firstDayOfTheWeek);
         String lastDayFormat = DateFormat.yMMMMd(lang).format(lastDayOfTheWeek);
         return '$firstDayFormat - $lastDayFormat';
       case PeriodicData.monthly:
@@ -96,8 +101,6 @@ extension PeriodicDataExtension on PeriodicData {
         return DateFormat.yMMMMd(lang).format(dateTime);
       case PeriodicData.allTime:
         return DateFormat("H:m:s", lang).format(dateTime);
-      default:
-        return null;
     }
   }
 }

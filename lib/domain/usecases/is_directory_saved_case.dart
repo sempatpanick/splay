@@ -5,5 +5,6 @@ class IsDirectorySavedCase {
 
   IsDirectorySavedCase({required this.repository});
 
-  Future<bool> execute({required String id}) => repository.isAddedToSavedDirectory(id: id);
+  Future<bool> execute({required String id}) =>
+      repository.isAddedToSavedDirectory(id: id);
 }

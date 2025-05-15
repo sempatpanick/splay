@@ -15,9 +15,5 @@ class FileMetaDataEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        title,
-        file,
-        metaData,
-      ];
+  List<Object?> get props => [title, file, metaData];
 }

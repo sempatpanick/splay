@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 
 import '../../common/exception.dart';
@@ -48,7 +49,9 @@ class SplayRepositoryImpl implements SplayRepository {
     required DirectorySavedEntity directory,
   }) async {
     try {
-      final result = await localDataSource.insertDirectorySaved(directory: directory.toModel());
+      final result = await localDataSource.insertDirectorySaved(
+        directory: directory.toModel(),
+      );
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -62,7 +65,9 @@ class SplayRepositoryImpl implements SplayRepository {
     required DirectorySavedEntity directory,
   }) async {
     try {
-      final result = await localDataSource.removeDirectorySaved(directory: directory.toModel());
+      final result = await localDataSource.removeDirectorySaved(
+        directory: directory.toModel(),
+      );
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -78,7 +83,9 @@ class SplayRepositoryImpl implements SplayRepository {
   }
 
   @override
-  Future<Either<Failure, DirectorySavedEntity>> getDirectorySavedById({required String id}) async {
+  Future<Either<Failure, DirectorySavedEntity>> getDirectorySavedById({
+    required String id,
+  }) async {
     try {
       final result = await localDataSource.getDirectorySavedById(id: id);
 
@@ -95,15 +102,16 @@ class SplayRepositoryImpl implements SplayRepository {
   }
 
   @override
-  Future<Either<Failure, List<DirectorySavedEntity>>> getDirectorySaved() async {
+  Future<Either<Failure, List<DirectorySavedEntity>>>
+  getDirectorySaved() async {
     try {
       final result = await localDataSource.getDirectorySaved();
       return Right(result.map((item) => item.toEntity()).toList());
     } on DatabaseException catch (e) {
-      print(e.message);
+      debugPrint(e.message);
       return Left(DatabaseFailure(e.message));
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return Left(ResponseFailure(e.toString()));
     }
   }

@@ -14,9 +14,10 @@ class LibraryPage extends StatelessWidget {
 
     return GetBuilder<LibraryController>(
       init: LibraryController(),
-      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.initialize(),
-      ),
+      didChangeDependencies:
+          (state) => WidgetsBinding.instance.addPostFrameCallback(
+            (_) => state.controller?.initialize(),
+          ),
       builder: (_) {
         if (size.width <= 700) {
           return const LibraryPagePhone();

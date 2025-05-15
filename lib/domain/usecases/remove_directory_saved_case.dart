@@ -9,6 +9,7 @@ class RemoveDirectorySavedCase {
 
   RemoveDirectorySavedCase({required this.repository});
 
-  Future<Either<Failure, String>> execute({required DirectorySavedEntity directory}) =>
-      repository.removeDirectorySaved(directory: directory);
+  Future<Either<Failure, String>> execute({
+    required DirectorySavedEntity directory,
+  }) => repository.removeDirectorySaved(directory: directory);
 }

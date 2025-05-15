@@ -37,12 +37,16 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<int> insertDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<int> insertDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     final db = await database;
     return await db!.insert(_tblDirectorySaved, directory.toJson());
   }
 
-  Future<int> removeDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<int> removeDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     final db = await database;
     return await db!.delete(
       _tblDirectorySaved,
@@ -51,7 +55,9 @@ class DatabaseHelper {
     );
   }
 
-  Future<Map<String, dynamic>?> getDirectorySavedById({required String id}) async {
+  Future<Map<String, dynamic>?> getDirectorySavedById({
+    required String id,
+  }) async {
     final db = await database;
     final results = await db!.query(
       _tblDirectorySaved,
@@ -68,7 +74,9 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getDirectorySaved() async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblDirectorySaved);
+    final List<Map<String, dynamic>> results = await db!.query(
+      _tblDirectorySaved,
+    );
 
     return results;
   }

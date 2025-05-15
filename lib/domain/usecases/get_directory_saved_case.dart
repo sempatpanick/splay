@@ -9,5 +9,6 @@ class GetDirectorySavedCase {
 
   GetDirectorySavedCase({required this.repository});
 
-  Future<Either<Failure, List<DirectorySavedEntity>>> execute() => repository.getDirectorySaved();
+  Future<Either<Failure, List<DirectorySavedEntity>>> execute() =>
+      repository.getDirectorySaved();
 }

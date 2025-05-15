@@ -8,7 +8,5 @@ class GetFilesFromDirectoryCase {
   GetFilesFromDirectoryCase({required this.repository});
 
   Future<List<FileSystemEntity>> execute({required String path}) =>
-      repository.getFilesFromDirectory(
-        path: path,
-      );
+      repository.getFilesFromDirectory(path: path);
 }

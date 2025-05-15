@@ -15,25 +15,32 @@ SnackbarController successSnackBar(
     title,
     message,
     margin: const EdgeInsets.only(top: 16, left: 16.0, right: 16.0),
-    padding: title.isEmpty
-        ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 15.0)
-        : null,
+    padding:
+        title.isEmpty
+            ? const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              top: 8.0,
+              bottom: 15.0,
+            )
+            : null,
     titleText: title.isEmpty ? const SizedBox() : null,
-    messageText: isShowIcon || title.isNotEmpty
-        ? Text(
-            message,
-            style: lightTheme.textTheme.labelLarge?.copyWith(
-              color: Colors.white,
-            ),
-          )
-        : Center(
-            child: Text(
+    messageText:
+        isShowIcon || title.isNotEmpty
+            ? Text(
               message,
               style: lightTheme.textTheme.labelLarge?.copyWith(
                 color: Colors.white,
               ),
+            )
+            : Center(
+              child: Text(
+                message,
+                style: lightTheme.textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
             ),
-          ),
     icon: isShowIcon ? const Icon(Icons.check_circle_outline) : null,
     duration: Duration(seconds: durationSecond),
     colorText: Colors.white,
@@ -56,31 +63,33 @@ SnackbarController failedSnackBar(
     title,
     message,
     margin: const EdgeInsets.only(top: 16, left: 16.0, right: 16.0),
-    padding: title.isEmpty
-        ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 15.0)
-        : null,
+    padding:
+        title.isEmpty
+            ? const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              top: 8.0,
+              bottom: 15.0,
+            )
+            : null,
     titleText: title.isEmpty ? const SizedBox() : null,
-    messageText: isShowIcon || title.isNotEmpty
-        ? Text(
-            message,
-            style: lightTheme.textTheme.labelLarge?.copyWith(
-              color: Colors.white,
-            ),
-          )
-        : Center(
-            child: Text(
+    messageText:
+        isShowIcon || title.isNotEmpty
+            ? Text(
               message,
               style: lightTheme.textTheme.labelLarge?.copyWith(
                 color: Colors.white,
               ),
+            )
+            : Center(
+              child: Text(
+                message,
+                style: lightTheme.textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
             ),
-          ),
-    icon: isShowIcon
-        ? const Icon(
-            Icons.close,
-            color: Colors.white,
-          )
-        : null,
+    icon: isShowIcon ? const Icon(Icons.close, color: Colors.white) : null,
     duration: Duration(seconds: durationSecond),
     colorText: Colors.white,
     backgroundColor: errorColor,

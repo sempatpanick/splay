@@ -8,7 +8,8 @@ class DatabaseHelperDesktop {
     _databaseHelperDesktop = this;
   }
 
-  factory DatabaseHelperDesktop() => _databaseHelperDesktop ?? DatabaseHelperDesktop._instance();
+  factory DatabaseHelperDesktop() =>
+      _databaseHelperDesktop ?? DatabaseHelperDesktop._instance();
 
   static Database? _database;
 
@@ -28,10 +29,7 @@ class DatabaseHelperDesktop {
 
     var db = await databaseFactory.openDatabase(
       databasePath,
-      options: OpenDatabaseOptions(
-        version: 1,
-        onCreate: _onCreate,
-      ),
+      options: OpenDatabaseOptions(version: 1, onCreate: _onCreate),
     );
     return db;
   }
@@ -45,12 +43,16 @@ class DatabaseHelperDesktop {
     ''');
   }
 
-  Future<int> insertDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<int> insertDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     final db = await database;
     return await db!.insert(_tblDirectorySaved, directory.toJson());
   }
 
-  Future<int> removeDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<int> removeDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     final db = await database;
     return await db!.delete(
       _tblDirectorySaved,
@@ -59,7 +61,9 @@ class DatabaseHelperDesktop {
     );
   }
 
-  Future<Map<String, dynamic>?> getDirectorySavedById({required String id}) async {
+  Future<Map<String, dynamic>?> getDirectorySavedById({
+    required String id,
+  }) async {
     final db = await database;
     final results = await db!.query(
       _tblDirectorySaved,
@@ -76,7 +80,9 @@ class DatabaseHelperDesktop {
 
   Future<List<Map<String, dynamic>>> getDirectorySaved() async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblDirectorySaved);
+    final List<Map<String, dynamic>> results = await db!.query(
+      _tblDirectorySaved,
+    );
 
     return results;
   }

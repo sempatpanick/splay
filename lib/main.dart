@@ -30,15 +30,9 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       initialRoute: MainPage.routeName,
       debugShowCheckedModeBanner: false,
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('id', 'ID'),
-      ],
+      supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
       getPages: [
-        GetPage(
-          name: MainPage.routeName,
-          page: () => const MainPage(),
-        ),
+        GetPage(name: MainPage.routeName, page: () => const MainPage()),
       ],
     );
   }

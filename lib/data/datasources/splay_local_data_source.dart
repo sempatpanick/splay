@@ -24,7 +24,9 @@ class SplayLocalDataSourceImpl implements SplayLocalDataSource {
   });
 
   @override
-  Future<String> insertDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<String> insertDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     try {
       if (Platform.isWindows || Platform.isLinux || kIsWeb) {
         await databaseHelperDesktop.insertDirectorySaved(directory: directory);
@@ -38,7 +40,9 @@ class SplayLocalDataSourceImpl implements SplayLocalDataSource {
   }
 
   @override
-  Future<String> removeDirectorySaved({required DirectorySavedModel directory}) async {
+  Future<String> removeDirectorySaved({
+    required DirectorySavedModel directory,
+  }) async {
     try {
       if (Platform.isWindows || Platform.isLinux || kIsWeb) {
         await databaseHelperDesktop.removeDirectorySaved(directory: directory);
@@ -52,7 +56,9 @@ class SplayLocalDataSourceImpl implements SplayLocalDataSource {
   }
 
   @override
-  Future<DirectorySavedModel?> getDirectorySavedById({required String id}) async {
+  Future<DirectorySavedModel?> getDirectorySavedById({
+    required String id,
+  }) async {
     try {
       Map<String, dynamic>? result;
       if (Platform.isWindows || Platform.isLinux || kIsWeb) {

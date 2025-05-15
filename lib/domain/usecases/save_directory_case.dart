@@ -9,6 +9,7 @@ class SaveDirectoryCase {
 
   SaveDirectoryCase({required this.repository});
 
-  Future<Either<Failure, String>> execute({required DirectorySavedEntity directory}) =>
-      repository.insertDirectorySaved(directory: directory);
+  Future<Either<Failure, String>> execute({
+    required DirectorySavedEntity directory,
+  }) => repository.insertDirectorySaved(directory: directory);
 }

@@ -73,9 +73,7 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> playMusic(FileSystemEntity file, Metadata metadata) async {
-    await audioPlayer.play(
-      DeviceFileSource(file.path),
-    );
+    await audioPlayer.play(DeviceFileSource(file.path));
     selectedPlayingMusic.value = file;
     selectedPlayingMusicMetadata.value = metadata;
     update();
@@ -125,21 +123,27 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> seekBackward() async {
-    int calculateDurationSecond = positionAudio.value.inSeconds - seekDurationSecond.value;
+    int calculateDurationSecond =
+        positionAudio.value.inSeconds - seekDurationSecond.value;
     if (calculateDurationSecond < 0) {
       await audioPlayer.seek(const Duration(seconds: 0));
       return;
     }
-    await audioPlayer.seek(positionAudio.value - Duration(seconds: seekDurationSecond.value));
+    await audioPlayer.seek(
+      positionAudio.value - Duration(seconds: seekDurationSecond.value),
+    );
   }
 
   Future<void> seekForward() async {
-    int calculateDurationSecond = positionAudio.value.inSeconds + seekDurationSecond.value;
+    int calculateDurationSecond =
+        positionAudio.value.inSeconds + seekDurationSecond.value;
     if (calculateDurationSecond > durationAudio.value.inSeconds) {
       await audioPlayer.seek(durationAudio.value);
       return;
     }
-    await audioPlayer.seek(positionAudio.value + Duration(seconds: seekDurationSecond.value));
+    await audioPlayer.seek(
+      positionAudio.value + Duration(seconds: seekDurationSecond.value),
+    );
   }
 
   void setTurnsIncrement(double value) {

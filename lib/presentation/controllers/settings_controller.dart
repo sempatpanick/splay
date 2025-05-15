@@ -29,17 +29,20 @@ class SettingsController extends GetxController {
 
     final result = await getDirectorySavedCase.execute();
 
-    result.fold((l) {
-      changeStateGetDirectorySaved(RequestState.error);
-      failedSnackBar("", l.message);
-    }, (r) {
-      directories.assignAll(r);
-      if (directories.isEmpty) {
-        changeStateGetDirectorySaved(RequestState.empty);
-        return;
-      }
-      changeStateGetDirectorySaved(RequestState.loaded);
-    });
+    result.fold(
+      (l) {
+        changeStateGetDirectorySaved(RequestState.error);
+        failedSnackBar("", l.message);
+      },
+      (r) {
+        directories.assignAll(r);
+        if (directories.isEmpty) {
+          changeStateGetDirectorySaved(RequestState.empty);
+          return;
+        }
+        changeStateGetDirectorySaved(RequestState.loaded);
+      },
+    );
   }
 
   Future<void> addNewDirectory() async {
@@ -56,35 +59,40 @@ class SettingsController extends GetxController {
 
     if (path == null) return;
 
-    final data = DirectorySavedEntity(
-      id: const Uuid().v4(),
-      path: path,
-    );
+    final data = DirectorySavedEntity(id: const Uuid().v4(), path: path);
     final result = await saveDirectoryCase.execute(directory: data);
 
-    result.fold((l) {
-      changeStateSaveDirectory(RequestState.error);
-      failedSnackBar("", l.message);
-    }, (r) {
-      successSnackBar("", r);
-      getDirectorySaved();
-      changeStateSaveDirectory(RequestState.loaded);
-    });
+    result.fold(
+      (l) {
+        changeStateSaveDirectory(RequestState.error);
+        failedSnackBar("", l.message);
+      },
+      (r) {
+        successSnackBar("", r);
+        getDirectorySaved();
+        changeStateSaveDirectory(RequestState.loaded);
+      },
+    );
   }
 
-  Future<void> removeDirectorySaved({required DirectorySavedEntity directory}) async {
+  Future<void> removeDirectorySaved({
+    required DirectorySavedEntity directory,
+  }) async {
     changeStateSaveDirectory(RequestState.loading);
 
     final result = await removeDirectorySavedCase.execute(directory: directory);
 
-    result.fold((l) {
-      changeStateSaveDirectory(RequestState.error);
-      failedSnackBar("", l.message);
-    }, (r) {
-      successSnackBar("", r);
-      getDirectorySaved();
-      changeStateSaveDirectory(RequestState.loaded);
-    });
+    result.fold(
+      (l) {
+        changeStateSaveDirectory(RequestState.error);
+        failedSnackBar("", l.message);
+      },
+      (r) {
+        successSnackBar("", r);
+        getDirectorySaved();
+        changeStateSaveDirectory(RequestState.loaded);
+      },
+    );
   }
 
   void changeStateGetDirectorySaved(RequestState state) {

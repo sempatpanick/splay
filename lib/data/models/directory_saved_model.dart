@@ -10,24 +10,15 @@ class DirectorySavedModel extends Equatable {
   final String id;
   final String path;
 
-  const DirectorySavedModel({
-    required this.id,
-    required this.path,
-  });
+  const DirectorySavedModel({required this.id, required this.path});
 
   factory DirectorySavedModel.fromJson(Map<String, dynamic> json) =>
       _$DirectorySavedModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$DirectorySavedModelToJson(this);
 
-  DirectorySavedEntity toEntity() => DirectorySavedEntity(
-        id: id,
-        path: path,
-      );
+  DirectorySavedEntity toEntity() => DirectorySavedEntity(id: id, path: path);
 
   @override
-  List<Object?> get props => [
-        id,
-        path,
-      ];
+  List<Object?> get props => [id, path];
 }

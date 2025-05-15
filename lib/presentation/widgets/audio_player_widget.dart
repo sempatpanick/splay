@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 import 'package:splay/presentation/controllers/main_controller.dart';
 
 class AudioPlayerWidget extends StatelessWidget {
-  const AudioPlayerWidget({Key? key}) : super(key: key);
+  const AudioPlayerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,35 +23,51 @@ class AudioPlayerWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const SizedBox(
-                  width: 8.0,
-                ),
+                const SizedBox(width: 8.0),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: SizedBox.fromSize(
                     size: const Size(50, 50),
-                    child: controller.selectedPlayingMusicMetadata.value?.albumArt != null
-                        ? Image.memory(controller.selectedPlayingMusicMetadata.value!.albumArt!)
-                        : Image.network(
-                            'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
-                          ),
+                    child:
+                        controller
+                                    .selectedPlayingMusicMetadata
+                                    .value
+                                    ?.albumArt !=
+                                null
+                            ? Image.memory(
+                              controller
+                                  .selectedPlayingMusicMetadata
+                                  .value!
+                                  .albumArt!,
+                            )
+                            : Image.network(
+                              'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
+                            ),
                   ),
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        (controller.selectedPlayingMusicMetadata.value?.trackName ?? '').isNotEmpty
-                            ? controller.selectedPlayingMusicMetadata.value?.trackName ?? ''
+                        (controller
+                                        .selectedPlayingMusicMetadata
+                                        .value
+                                        ?.trackName ??
+                                    '')
+                                .isNotEmpty
+                            ? controller
+                                    .selectedPlayingMusicMetadata
+                                    .value
+                                    ?.trackName ??
+                                ''
                             : controller.selectedPlayingMusic.value != null
-                                ? p.basenameWithoutExtension(
-                                    controller.selectedPlayingMusic.value!.path)
-                                : '',
+                            ? p.basenameWithoutExtension(
+                              controller.selectedPlayingMusic.value!.path,
+                            )
+                            : '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleMedium?.copyWith(
@@ -59,9 +75,7 @@ class AudioPlayerWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: 4.0,
-                      ),
+                      const SizedBox(height: 4.0),
                       Text(
                         "${controller.selectedPlayingMusicMetadata.value?.albumArtistName ?? ''}${controller.selectedPlayingMusicMetadata.value?.year != null ? ", ${controller.selectedPlayingMusicMetadata.value?.year}" : ''}",
                         style: theme.textTheme.titleSmall?.copyWith(
@@ -71,12 +85,13 @@ class AudioPlayerWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12),
                 IconButton(
                   splashRadius: 20.0,
-                  constraints: const BoxConstraints(minHeight: 70, minWidth: 70),
+                  constraints: const BoxConstraints(
+                    minHeight: 70,
+                    minWidth: 70,
+                  ),
                   onPressed: controller.playOrPause,
                   icon: Center(
                     child: AnimatedIcon(
@@ -100,28 +115,43 @@ class AudioPlayerWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
                 child: SizedBox.fromSize(
                   size: const Size(50, 50),
-                  child: controller.selectedPlayingMusicMetadata.value?.albumArt != null
-                      ? Image.memory(controller.selectedPlayingMusicMetadata.value!.albumArt!)
-                      : Image.network(
-                          'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
-                        ),
+                  child:
+                      controller.selectedPlayingMusicMetadata.value?.albumArt !=
+                              null
+                          ? Image.memory(
+                            controller
+                                .selectedPlayingMusicMetadata
+                                .value!
+                                .albumArt!,
+                          )
+                          : Image.network(
+                            'https://cdn.pixabay.com/photo/2019/08/11/18/27/icon-4399630_1280.png',
+                          ),
                 ),
               ),
-              const SizedBox(
-                width: 24,
-              ),
+              const SizedBox(width: 24),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      (controller.selectedPlayingMusicMetadata.value?.trackName ?? '').isNotEmpty
-                          ? controller.selectedPlayingMusicMetadata.value?.trackName ?? ''
+                      (controller
+                                      .selectedPlayingMusicMetadata
+                                      .value
+                                      ?.trackName ??
+                                  '')
+                              .isNotEmpty
+                          ? controller
+                                  .selectedPlayingMusicMetadata
+                                  .value
+                                  ?.trackName ??
+                              ''
                           : controller.selectedPlayingMusic.value != null
-                              ? p.basenameWithoutExtension(
-                                  controller.selectedPlayingMusic.value!.path)
-                              : '',
+                          ? p.basenameWithoutExtension(
+                            controller.selectedPlayingMusic.value!.path,
+                          )
+                          : '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -129,9 +159,7 @@ class AudioPlayerWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
+                    const SizedBox(height: 8.0),
                     Text(
                       "${controller.selectedPlayingMusicMetadata.value?.albumArtistName ?? ''}${controller.selectedPlayingMusicMetadata.value?.year != null ? ", ${controller.selectedPlayingMusicMetadata.value?.year}" : ''}",
                       style: theme.textTheme.titleSmall?.copyWith(
@@ -141,9 +169,7 @@ class AudioPlayerWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 24,
-              ),
+              const SizedBox(width: 24),
               Expanded(
                 flex: 2,
                 child: Column(
@@ -159,9 +185,7 @@ class AudioPlayerWidget extends StatelessWidget {
                           icon: const Icon(Icons.shuffle),
                           color: theme.secondaryHeaderColor,
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         IconButton(
                           onPressed: controller.seekBackward,
                           constraints: const BoxConstraints(),
@@ -169,12 +193,13 @@ class AudioPlayerWidget extends StatelessWidget {
                           icon: const Icon(Icons.skip_previous),
                           color: theme.secondaryHeaderColor,
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         IconButton(
                           splashRadius: 20.0,
-                          constraints: const BoxConstraints(minHeight: 70, minWidth: 70),
+                          constraints: const BoxConstraints(
+                            minHeight: 70,
+                            minWidth: 70,
+                          ),
                           onPressed: controller.playOrPause,
                           icon: DecoratedBox(
                             decoration: BoxDecoration(
@@ -189,11 +214,10 @@ class AudioPlayerWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          tooltip: controller.isPlaying.value ? "Pause" : "Play",
+                          tooltip:
+                              controller.isPlaying.value ? "Pause" : "Play",
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         IconButton(
                           onPressed: controller.seekForward,
                           constraints: const BoxConstraints(),
@@ -201,16 +225,21 @@ class AudioPlayerWidget extends StatelessWidget {
                           icon: const Icon(Icons.skip_next),
                           color: theme.secondaryHeaderColor,
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         IconButton(
                           onPressed: controller.changeIsRepeat,
                           constraints: const BoxConstraints(),
                           padding: EdgeInsets.zero,
-                          icon: Icon(controller.isRepeat.value ? Icons.repeat_one : Icons.repeat),
+                          icon: Icon(
+                            controller.isRepeat.value
+                                ? Icons.repeat_one
+                                : Icons.repeat,
+                          ),
                           color: theme.secondaryHeaderColor,
-                          tooltip: controller.isRepeat.value ? "Repeat Off" : "Repeat One",
+                          tooltip:
+                              controller.isRepeat.value
+                                  ? "Repeat Off"
+                                  : "Repeat One",
                         ),
                       ],
                     ),
@@ -222,27 +251,29 @@ class AudioPlayerWidget extends StatelessWidget {
                             color: theme.secondaryHeaderColor,
                           ),
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         Expanded(
                           flex: 1,
                           child: SliderTheme(
-                            data: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
+                            data: SliderThemeData(
+                              overlayShape: SliderComponentShape.noOverlay,
+                            ),
                             child: Slider(
                               activeColor: theme.secondaryHeaderColor,
                               thumbColor: theme.secondaryHeaderColor,
                               inactiveColor: theme.secondaryHeaderColor,
-                              value: controller.positionAudio.value.inSeconds.toDouble(),
+                              value:
+                                  controller.positionAudio.value.inSeconds
+                                      .toDouble(),
                               min: 0,
-                              max: controller.durationAudio.value.inSeconds.toDouble(),
+                              max:
+                                  controller.durationAudio.value.inSeconds
+                                      .toDouble(),
                               onChanged: controller.changeSliderPosition,
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
+                        const SizedBox(width: 8.0),
                         Text(
                           controller.utils.time(controller.durationAudio.value),
                           style: theme.textTheme.titleMedium?.copyWith(
@@ -254,9 +285,7 @@ class AudioPlayerWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 24,
-              ),
+              const SizedBox(width: 24),
               IconButton(
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
@@ -274,7 +303,9 @@ class AudioPlayerWidget extends StatelessWidget {
               SizedBox(
                 width: 150,
                 child: SliderTheme(
-                  data: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
+                  data: SliderThemeData(
+                    overlayShape: SliderComponentShape.noOverlay,
+                  ),
                   child: Slider(
                     activeColor: theme.secondaryHeaderColor,
                     thumbColor: theme.secondaryHeaderColor,

@@ -42,30 +42,38 @@ class LibraryController extends GetxController {
 
     final result = await getDirectorySavedCase.execute();
 
-    result.fold((l) {
-      failedSnackBar("", l.message);
-      changeStateLibrary(RequestState.error);
-    }, (r) async {
-      final List<FileMetaDataEntity> dataList = [];
+    result.fold(
+      (l) {
+        failedSnackBar("", l.message);
+        changeStateLibrary(RequestState.error);
+      },
+      (r) async {
+        final List<FileMetaDataEntity> dataList = [];
 
-      await Future.forEach(r, (item) async {
-        final files = await getFilesFromDirectory(path: item.path);
-        final metaDataList = await getMetaData(paths: files.map((item) => item.path).toList());
-        files.asMap().forEach((index, value) {
-          dataList.add(FileMetaDataEntity(
-            title: (metaDataList[index].trackName ?? '').isNotEmpty
-                ? metaDataList[index].trackName ?? ''
-                : basenameWithoutExtension(value.path),
-            file: value,
-            metaData: metaDataList[index],
-          ));
+        await Future.forEach(r, (item) async {
+          final files = await getFilesFromDirectory(path: item.path);
+          final metaDataList = await getMetaData(
+            paths: files.map((item) => item.path).toList(),
+          );
+          files.asMap().forEach((index, value) {
+            dataList.add(
+              FileMetaDataEntity(
+                title:
+                    (metaDataList[index].trackName ?? '').isNotEmpty
+                        ? metaDataList[index].trackName ?? ''
+                        : basenameWithoutExtension(value.path),
+                file: value,
+                metaData: metaDataList[index],
+              ),
+            );
+          });
         });
-      });
 
-      dataList.sort((a, b) => a.title.compareTo(b.title));
-      myLibrary.assignAll(dataList);
-      changeStateLibrary(RequestState.loaded);
-    });
+        dataList.sort((a, b) => a.title.compareTo(b.title));
+        myLibrary.assignAll(dataList);
+        changeStateLibrary(RequestState.loaded);
+      },
+    );
   }
 
   Future<void> addNewDirectory() async {
@@ -80,10 +88,7 @@ class LibraryController extends GetxController {
 
     if (path == null) return;
 
-    final data = DirectorySavedEntity(
-      id: const Uuid().v4(),
-      path: path,
-    );
+    final data = DirectorySavedEntity(id: const Uuid().v4(), path: path);
     final result = await saveDirectoryCase.execute(directory: data);
 
     result.fold((l) => failedSnackBar("", l.message), (r) {
@@ -92,7 +97,9 @@ class LibraryController extends GetxController {
     });
   }
 
-  Future<List<FileSystemEntity>> getFilesFromDirectory({required String path}) async {
+  Future<List<FileSystemEntity>> getFilesFromDirectory({
+    required String path,
+  }) async {
     final result = await getFilesFromDirectoryCase.execute(path: path);
 
     return result;

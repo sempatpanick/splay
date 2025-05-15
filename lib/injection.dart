@@ -20,13 +20,25 @@ final locator = GetIt.instance;
 
 void init() {
   // use case
-  locator.registerLazySingleton(() => GetFilesFromDirectoryCase(repository: locator()));
-  locator.registerLazySingleton(() => GetMetaDataListCase(repository: locator()));
-  locator.registerLazySingleton(() => GetDirectorySavedCase(repository: locator()));
-  locator.registerLazySingleton(() => GetDirectorySavedByIdCase(repository: locator()));
-  locator.registerLazySingleton(() => IsDirectorySavedCase(repository: locator()));
+  locator.registerLazySingleton(
+    () => GetFilesFromDirectoryCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => GetMetaDataListCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => GetDirectorySavedCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => GetDirectorySavedByIdCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => IsDirectorySavedCase(repository: locator()),
+  );
   locator.registerLazySingleton(() => SaveDirectoryCase(repository: locator()));
-  locator.registerLazySingleton(() => RemoveDirectorySavedCase(repository: locator()));
+  locator.registerLazySingleton(
+    () => RemoveDirectorySavedCase(repository: locator()),
+  );
 
   // repository
   locator.registerLazySingleton<SplayRepository>(

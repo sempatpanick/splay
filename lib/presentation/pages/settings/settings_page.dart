@@ -13,9 +13,10 @@ class SettingsPage extends StatelessWidget {
 
     return GetBuilder<SettingsController>(
       init: SettingsController(),
-      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.getDirectorySaved(),
-      ),
+      didChangeDependencies:
+          (state) => WidgetsBinding.instance.addPostFrameCallback(
+            (_) => state.controller?.getDirectorySaved(),
+          ),
       builder: (_) {
         if (size.width <= 700) {
           return const SettingsPageWeb();

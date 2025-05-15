@@ -13,38 +13,47 @@ class MainPagePhone extends StatelessWidget {
 
     return GetX<MainController>(
       init: MainController(),
-      builder: (controller) => Scaffold(
-        body: controller.navigationMenus
-            .where((item) => item.isShowMenu && item.parent == null)
-            .toList()[controller.selectedNavigationMenu.value]
-            .page,
-        bottomNavigationBar: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (controller.selectedPlayingMusicMetadata.value != null) const AudioPlayerWidget(),
-            BottomNavigationBar(
-              backgroundColor: theme.primaryColor,
-              currentIndex: controller.selectedNavigationMenu.value,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white60,
-              items: controller.navigationMenus
-                  .where((item) => item.isShowMenu && item.parent == null)
-                  .map(
-                    (item) => BottomNavigationBarItem(
-                      icon: Icon(item.icon),
-                      label: item.title,
-                    ),
-                  )
-                  .toList(),
-              onTap: (value) => controller.changeSelectedNavigationMenu(
+      builder:
+          (controller) => Scaffold(
+            body:
                 controller.navigationMenus
                     .where((item) => item.isShowMenu && item.parent == null)
-                    .toList()[value],
-              ),
+                    .toList()[controller.selectedNavigationMenu.value]
+                    .page,
+            bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (controller.selectedPlayingMusicMetadata.value != null)
+                  const AudioPlayerWidget(),
+                BottomNavigationBar(
+                  backgroundColor: theme.primaryColor,
+                  currentIndex: controller.selectedNavigationMenu.value,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.white60,
+                  items:
+                      controller.navigationMenus
+                          .where(
+                            (item) => item.isShowMenu && item.parent == null,
+                          )
+                          .map(
+                            (item) => BottomNavigationBarItem(
+                              icon: Icon(item.icon),
+                              label: item.title,
+                            ),
+                          )
+                          .toList(),
+                  onTap:
+                      (value) => controller.changeSelectedNavigationMenu(
+                        controller.navigationMenus
+                            .where(
+                              (item) => item.isShowMenu && item.parent == null,
+                            )
+                            .toList()[value],
+                      ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

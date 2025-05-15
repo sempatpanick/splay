@@ -5,10 +5,6 @@ class Utils {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return [
-      if (duration.inHours > 0) hours,
-      minutes,
-      seconds,
-    ].join(":");
+    return [if (duration.inHours > 0) hours, minutes, seconds].join(":");
   }
 }

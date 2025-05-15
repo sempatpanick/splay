@@ -11,7 +11,9 @@ abstract class SplayFileDataSource {
 
 class SplayFileDataSourceImpl implements SplayFileDataSource {
   @override
-  Future<List<FileSystemEntity>> getFilesFromDirectory({required String path}) async {
+  Future<List<FileSystemEntity>> getFilesFromDirectory({
+    required String path,
+  }) async {
     final dir = Directory(path);
     var tempFiles = <FileSystemEntity>[];
     var completer = Completer<List<FileSystemEntity>>();
@@ -22,7 +24,8 @@ class SplayFileDataSourceImpl implements SplayFileDataSource {
       onDone: () => completer.complete(tempFiles),
     );
     final files = await completer.future;
-    final searchMusic = files.where((item) => extension(item.path) == '.mp3').toList();
+    final searchMusic =
+        files.where((item) => extension(item.path) == '.mp3').toList();
     return searchMusic;
   }
 
